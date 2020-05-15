@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:17 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/05/12 22:53:31 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/05/14 23:48:25 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);
