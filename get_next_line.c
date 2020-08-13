@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/05/14 23:43:42 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/12 23:57:27 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ int		get_next_line(int fd, char **line)
 	char *rest;
 
 	buf_pos = 0;
-	//read_return = read(fd, buf, BUFFER_SIZE, buf_pos);
-	read_return = read(fd, buf, BUFFER_SIZE);
-
-	rest = ft_strjoin(rest, buf);
+	rest = "";
+	//printf("buffer_size: %i\n", BUFFER_SIZE);
+	while (read_return = read(fd, buf, BUFFER_SIZE))
+	{
+		buf[read_return]='\0';
+		printf("read_return: %i\n", read_return);
+		rest = ft_strjoin(rest, buf);
+		printf("rest: %s\n", rest);
+	}
 	line[0] = ft_split_line (rest, return_value);
+	printf("line[0]: %s\n", line[0]);
+	//read(fd, *buf, BUFFER_SIZE);
 
 	buf_pos = buf_pos + read_return;
 	return (return_value);
@@ -33,33 +40,33 @@ int		get_next_line(int fd, char **line)
 
 int main() {
 
-        int fd;
-        int a;
-        char *linha;
+	int fd;
+	int a;
+	char *linha;
 
-        printf("Lendo arquivo ...\n");
-        //open arquivo
-        fd = open("arquivo",O_RDONLY);
-        
-        a = get_next_line(fd, &linha);   
-        printf("linha: %s\n",linha);
-        printf("================\n");
+	printf("Lendo arquivo ...\n");
+	//open arquivo
+	fd = open("arquivo",O_RDONLY);
 
-        a = get_next_line(fd, &linha);   
-        printf("linha: %s\n",linha);
-        printf("================\n");
-        
-        a = get_next_line(fd, &linha);   
-        printf("linha: %s\n",linha);
-        printf("================\n");
-        
-        a = get_next_line(fd, &linha);   
-        printf("linha: %s\n",linha);
-        printf("================\n");
-        
-        a = get_next_line(fd, &linha);   
-        printf("linha: %s\n",linha);
-        printf("================\n");
-        
-        close(fd);
+	a = get_next_line(fd, &linha);
+	printf("linha: %s\n",linha);
+	printf("================\n");
+
+	a = get_next_line(fd, &linha);
+	printf("linha: %s\n",linha);
+	printf("================\n");
+
+	a = get_next_line(fd, &linha);
+	printf("linha: %s\n",linha);
+	printf("================\n");
+
+	a = get_next_line(fd, &linha);
+	printf("linha: %s\n",linha);
+	printf("================\n");
+
+	a = get_next_line(fd, &linha);
+	printf("linha: %s\n",linha);
+	printf("================\n");
+
+	close(fd);
 }
