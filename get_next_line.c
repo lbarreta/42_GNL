@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/08/25 00:56:11 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/25 13:53:09 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		get_next_line(int fd, char **line)
 			read_return --;
 		}
 	}
+	if (ft_strlen(rest) > 1)
+		return (ft_split_line (rest, line));
 	return (0);
 }
 
