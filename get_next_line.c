@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/08/12 23:57:27 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/25 00:56:11 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 int		get_next_line(int fd, char **line)
 {
-	static int buf_pos;
-	static int return_value;
-	int read_return;
-	char *buf;
-	char *rest;
+	int			read_return;
+	char		buf[BUFFER_SIZE + 1];
+	static char	*rest;
 
-	buf_pos = 0;
-	rest = "";
-	//printf("buffer_size: %i\n", BUFFER_SIZE);
-	while (read_return = read(fd, buf, BUFFER_SIZE))
+	if (fd < 0 || line == NULL || BUFFER_SIZE == 0)
+		return (-1);
+	if (rest == NULL)
+		rest = "";
+	while ((read_return = read(fd, buf, BUFFER_SIZE)) >0 )
 	{
 		buf[read_return]='\0';
-		printf("read_return: %i\n", read_return);
 		rest = ft_strjoin(rest, buf);
-		printf("rest: %s\n", rest);
+		while (read_return >= 0)
+		{
+			if(buf[read_return] == '\n')
+				return (ft_split_line (rest, line));
+			read_return --;
+		}
 	}
-	line[0] = ft_split_line (rest, return_value);
-	printf("line[0]: %s\n", line[0]);
-	//read(fd, *buf, BUFFER_SIZE);
-
-	buf_pos = buf_pos + read_return;
-	return (return_value);
+	return (0);
 }
 
 int main() {
@@ -49,23 +47,43 @@ int main() {
 	fd = open("arquivo",O_RDONLY);
 
 	a = get_next_line(fd, &linha);
-	printf("linha: %s\n",linha);
+	printf("linha1: %s\n",linha);
+	printf("retorno da função: %i\n",a);
 	printf("================\n");
 
 	a = get_next_line(fd, &linha);
-	printf("linha: %s\n",linha);
+	printf("linha2: %s\n",linha);
+	printf("retorno da função: %i\n",a);
 	printf("================\n");
 
 	a = get_next_line(fd, &linha);
-	printf("linha: %s\n",linha);
+	printf("linha3: %s\n",linha);
+	printf("retorno da função: %i\n",a);
 	printf("================\n");
 
 	a = get_next_line(fd, &linha);
-	printf("linha: %s\n",linha);
+	printf("linha4: %s\n",linha);
+	printf("retorno da função: %i\n",a);
 	printf("================\n");
 
 	a = get_next_line(fd, &linha);
-	printf("linha: %s\n",linha);
+	printf("linha5: %s\n",linha);
+	printf("retorno da função: %i\n",a);
+	printf("================\n");
+
+	a = get_next_line(fd, &linha);
+	printf("linha6: %s\n",linha);
+	printf("retorno da função: %i\n",a);
+	printf("================\n");
+
+	a = get_next_line(fd, &linha);
+	printf("linha7: %s\n",linha);
+	printf("retorno da função: %i\n",a);
+	printf("================\n");
+
+	a = get_next_line(fd, &linha);
+	printf("linha8: %s\n",linha);
+	printf("retorno da função: %i\n",a);
 	printf("================\n");
 
 	close(fd);

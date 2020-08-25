@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:01 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/05/10 20:51:02 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/25 00:58:34 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,30 +51,46 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-char	*ft_split_line (char *rest, int return_value)
+char	*ft_strcut (char *rest, int i)
 {
-	int 	i;
+	int j;
+
+	j = 0;
+	while (rest[i] != '\0')
+	{
+		rest[j] = rest[i];
+		i++;
+		j++;
+	}
+	rest[j] = '\0';
+	return (rest);
+}
+
+int		ft_split_line (char *rest, char **line)
+{
+	int		i;
 	int		j;
 	char	*ptr;
 
-	if (!rest)
-		return (NULL);
 	i = 0;
-	while (rest[i] != '\0' || rest[i] != '\n')
+	while (rest[i] != '\0' && rest[i] != '\n')
 		i++;
-	if (!(ptr = malloc((i + 1) * sizeof(char))))
-		return (NULL);
-	ptr[i + 1] = '\0';
+	if (!(ptr = malloc((i) * sizeof(char))))
+		return (-1);
+	ptr[i] = '\0';
 	j = 0;
-	while (j <= i)
+	while (j < i)
 	{
 		ptr[j] = rest[j];
 		j++;
 	}
+	*line = ptr;
 	if (rest[i] == '\n')
-		return_value = 1;
-	else if (rest[i] == '\0')
-		return_value = -1;
-	*rest = *rest + i;
-	return (ptr);
+	{
+		i++;
+		rest = ft_strcut(rest, i);
+		return (1);
+	}
+	else
+		return (0);
 }
