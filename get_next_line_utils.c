@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:01 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/08/25 13:55:09 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/25 22:40:37 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,21 @@ size_t	ft_strlen(const char *str)
 {
 	int i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i] != '\0')
 		i++;
 	return (i);
+}
+
+void	ft_strfree(char *str)
+{
+	if (str == 0)
+		return ;
+	if (str)
+		free(str);
+	str = 0;
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
