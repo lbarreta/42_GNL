@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/08/30 23:36:37 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/31 14:30:07 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int		get_next_line(int fd, char **line)
 		rest = malloc(1 * sizeof(char));
 		rest[0] = '\0';
 	}
-	while ((read_return = read(fd, buf, BUFFER_SIZE)) > 0)
+	while (read_return = read(fd, buf, BUFFER_SIZE))
 	{
+		if (read_return < 0)
+			return (-1);
 		buf[read_return] = '\0';
 		temp = ft_strjoin(rest, buf);
 		ft_strfree(rest);
