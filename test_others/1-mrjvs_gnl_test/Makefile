@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # edit this to your get_next_line folder
-GET_NEXT_LINE_FOLDER = ../../
+GET_NEXT_LINE_FOLDER = /mnt/c/Users/Luiz\ Andre/Desktop/42/GNL/
 
 # dont touch this plz
 TESTS = 1 2 5 6 20 25 1024 5000 10000000
