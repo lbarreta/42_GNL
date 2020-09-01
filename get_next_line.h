@@ -6,14 +6,14 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:17 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/08/31 22:39:02 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/31 23:18:46 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # include <unistd.h>
-#include <stdlib.h>
+# include <stdlib.h>
 
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);
