@@ -6,11 +6,18 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/08/31 14:40:50 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/31 22:38:04 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_firstalloc(char *s1)
+{
+	s1 = malloc(1 * sizeof(char));
+	s1[0] = '\0';
+	return (s1);
+}
 
 int		get_next_line(int fd, char **line)
 {
@@ -22,10 +29,7 @@ int		get_next_line(int fd, char **line)
 	if (fd < 0 || line == NULL || BUFFER_SIZE == 0)
 		return (-1);
 	if (rest == NULL)
-	{
-		rest = malloc(1 * sizeof(char));
-		rest[0] = '\0';
-	}
+		rest = ft_firstalloc(rest);
 	while ((read_return = read(fd, buf, BUFFER_SIZE)))
 	{
 		if (read_return < 0)

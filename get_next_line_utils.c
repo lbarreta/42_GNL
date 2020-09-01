@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:01 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/08/31 20:30:19 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/08/31 22:37:51 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-char	*ft_strcut (char *rest, int i)
+char	*ft_strcut(char *rest, int i)
 {
 	int j;
 
@@ -72,11 +72,10 @@ char	*ft_strcut (char *rest, int i)
 		j++;
 	}
 	rest[j] = '\0';
-//	printf("rest: %s\n",rest);
 	return (rest);
 }
 
-int		ft_split_line (char *rest, char **line)
+int		ft_split_line(char *rest, char **line)
 {
 	int		i;
 	int		j;
@@ -97,13 +96,9 @@ int		ft_split_line (char *rest, char **line)
 	*line = ptr;
 	if (rest[i] == '\n')
 	{
-		i++;
-		rest = ft_strcut(rest, i);
+		rest = ft_strcut(rest, i + 1);
 		return (1);
 	}
-	else
-	{
-		rest[0] = '\0';
-		return (0);
-	}
+	rest[0] = '\0';
+	return (0);
 }
