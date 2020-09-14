@@ -6,53 +6,14 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/08 22:55:46 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/13 22:10:28 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//$ cat memory-leak.c
 #include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
-
-
-char	*ft_firstalloc(char *s1)
-{
-	s1 = malloc(1 * sizeof(char));
-	s1[0] = '\0';
-	return (s1);
-}
-
-int		get_next_line(int fd, char **line)
-{
-	int			read_return;
-	char		buf[BUFFER_SIZE + 1];
-	char		*temp;
-	static char	*rest;
-
-	if (fd < 0 || line == NULL || BUFFER_SIZE == 0)
-		return (-1);
-	if (rest == NULL)
-		rest = ft_firstalloc(rest);
-	while ((read_return = read(fd, buf, BUFFER_SIZE)))
-	{
-		if (read_return < 0)
-		{
-			ft_strfree(rest);
-			return (-1);
-		}
-		buf[read_return] = '\0';
-		temp = ft_strjoin(rest, buf);
-		ft_strfree(rest);
-		rest = temp;
-		while (read_return >= 0)
-		{
-			if (buf[read_return] == '\n')
-				return (ft_split_line(rest, line));
-			read_return--;
-		}
-	}
-	return (ft_split_line(rest, line));
-}
 
 int main() {
 
@@ -106,3 +67,5 @@ int main() {
 
 	close(fd);
 }
+//$ clang -fsanitize=address -g memory-leak.c
+//$ ./a.out
