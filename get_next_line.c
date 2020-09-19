@@ -6,12 +6,12 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/19 13:08:37 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/19 13:43:28 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+//#include <stdio.h>
 
 char	*ft_firstalloc(char *s1)
 {
@@ -28,18 +28,19 @@ int		get_next_line(int fd, char **line)
 	static char	*rest;
 	int			len;
 
-	printf("Rest - INICIO !!!\n%s\n",rest);
+	//printf("Rest - INICIO !!!\n$%s$\n",rest);
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE == 0)
 		return (-1);
-	if (rest == 0)
+	if (rest == 0 || *rest == '\0')
+	//if (rest == 0)
 	{
 		rest = ft_firstalloc(rest);
-		printf("Passei por aqui\n");
+		//printf("Passei por aqui\n");
 	}
 	while ((read_return = read(fd, buf, BUFFER_SIZE)))
 	{
-		printf("Passei por aqui no while\n");
+		//printf("Passei por aqui no while\n");
 		if (read_return < 0)
 		{
 			ft_strfree(rest);
