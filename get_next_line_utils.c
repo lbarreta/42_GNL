@@ -6,11 +6,12 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:01 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/13 19:58:41 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/19 13:08:43 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -97,8 +98,12 @@ int		ft_split_line(char *rest, char **line)
 	if (rest[i] == '\n')
 	{
 		rest = ft_strcut(rest, i + 1);
+		printf("Rest: %s\n",rest);
 		return (1);
 	}
-	rest = NULL;
+	printf("Rest: %s\n",rest);
+	ft_strfree(rest);
+	rest = 0;
+	printf("Rest NULL - FIM!!!\n%s\n",rest);
 	return (0);
 }
