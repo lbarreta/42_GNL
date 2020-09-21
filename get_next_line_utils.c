@@ -6,12 +6,11 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:01 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/19 13:40:26 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/20 20:49:54 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-//#include <stdio.h>
 
 size_t	ft_strlen(const char *str)
 {
@@ -25,13 +24,13 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void	ft_strfree(char *str)
+void	ft_strfree(char **str)
 {
-	if (str == 0)
+	if (*str == 0)
 		return ;
-	if (str)
-		free(str);
-	str = 0;
+	if (*str)
+		free(*str);
+	*str = NULL;
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -76,14 +75,14 @@ char	*ft_strcut(char *rest, int i)
 	return (rest);
 }
 
-int		ft_split_line(char *rest, char **line)
+int		ft_split_line(char **rest, char **line)
 {
 	int		i;
 	int		j;
 	char	*ptr;
 
 	i = 0;
-	while (rest[i] != '\0' && rest[i] != '\n')
+	while ((*rest)[i] != '\0' && (*rest)[i] != '\n')
 		i++;
 	if (!(ptr = malloc((i + 1) * sizeof(char))))
 		return (-1);
@@ -91,19 +90,16 @@ int		ft_split_line(char *rest, char **line)
 	j = 0;
 	while (j < i)
 	{
-		ptr[j] = rest[j];
+		ptr[j] = (*rest)[j];
 		j++;
 	}
 	*line = ptr;
-	if (rest[i] == '\n')
+	if ((*rest)[i] == '\n')
 	{
-		rest = ft_strcut(rest, i + 1);
-		//printf("Rest: %s\n",rest);
+		*rest = ft_strcut(*rest, i + 1);
 		return (1);
 	}
-	//printf("Rest: %s\n",rest);
 	ft_strfree(rest);
-	rest = 0;
-	//printf("Rest NULL - FIM!!!\n$%s$\n",rest);
+	*rest = NULL;
 	return (0);
 }
