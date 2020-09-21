@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/20 23:28:57 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/20 23:40:56 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,19 @@ int		ft_error(char **rest)
 	return (-1);
 }
 
+void	ft_changerest(char **rest, char *buf)
+{
+	char	*temp;
+
+	temp = ft_strjoin(*rest, buf);
+	ft_strfree(rest);
+	*rest = temp;
+}
+
 int		get_next_line(int fd, char **line)
 {
 	int			read_return;
 	char		buf[BUFFER_SIZE + 1];
-	char		*temp;
 	static char	*rest;
 	int			len;
 
@@ -42,9 +50,7 @@ int		get_next_line(int fd, char **line)
 		if (read_return < 0)
 			return (ft_error(&rest));
 		buf[read_return] = '\0';
-		temp = ft_strjoin(rest, buf);
-		ft_strfree(&rest);
-		rest = temp;
+		ft_changerest(&rest, buf);
 		len = ft_strlen(rest);
 		while (len >= 0)
 		{
