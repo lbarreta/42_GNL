@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:01 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/20 20:49:54 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/20 21:42:01 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,27 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-char	*ft_strcut(char *rest, int i)
+void	ft_strcut(char **rest, int i)
 {
-	int j;
+	int		j;
+	int		len;
+	char	*temp;
 
 	j = 0;
-	while (rest[i] != '\0')
+	len = i;
+	while ((*rest)[len] != '\0')
+		len ++;
+	if (!(temp = malloc((len - i + 1) * sizeof(char))))
+		return;
+	while ((*rest)[i] != '\0')
 	{
-		rest[j] = rest[i];
+		temp[j] = (*rest)[i];
 		i++;
 		j++;
 	}
-	rest[j] = '\0';
-	return (rest);
+	temp[j] = '\0';
+	ft_strfree(rest);
+	*rest = temp;
 }
 
 int		ft_split_line(char **rest, char **line)
@@ -96,7 +104,7 @@ int		ft_split_line(char **rest, char **line)
 	*line = ptr;
 	if ((*rest)[i] == '\n')
 	{
-		*rest = ft_strcut(*rest, i + 1);
+		ft_strcut(rest, i + 1);
 		return (1);
 	}
 	ft_strfree(rest);

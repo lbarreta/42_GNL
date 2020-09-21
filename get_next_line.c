@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:12 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/20 20:29:54 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/20 21:30:01 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		get_next_line(int fd, char **line)
 	char		buf[BUFFER_SIZE + 1];
 	char		*temp;
 	static char	*rest;
+	int			len;
 
 	if (fd < 0 || line == NULL || BUFFER_SIZE == 0)
 		return (-1);
@@ -41,11 +42,12 @@ int		get_next_line(int fd, char **line)
 		temp = ft_strjoin(rest, buf);
 		ft_strfree(&rest);
 		rest = temp;
-		while (read_return >= 0)
+		len = ft_strlen(rest);
+		while (len >= 0)
 		{
-			if (buf[read_return] == '\n')
+			if (rest[len] == '\n')
 				return (ft_split_line(&rest, line));
-			read_return--;
+			len--;
 		}
 	}
 	return (ft_split_line(&rest, line));
