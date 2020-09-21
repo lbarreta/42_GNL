@@ -6,7 +6,7 @@
 /*   By: lbarreta <lbarreta@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/02 21:56:01 by lbarreta          #+#    #+#             */
-/*   Updated: 2020/09/20 21:42:01 by lbarreta         ###   ########.fr       */
+/*   Updated: 2020/09/20 23:00:43 by lbarreta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	ft_strcut(char **rest, int i)
 	j = 0;
 	len = i;
 	while ((*rest)[len] != '\0')
-		len ++;
+		len++;
 	if (!(temp = malloc((len - i + 1) * sizeof(char))))
-		return;
+		return ;
 	while ((*rest)[i] != '\0')
 	{
 		temp[j] = (*rest)[i];
